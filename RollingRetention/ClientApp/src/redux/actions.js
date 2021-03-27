@@ -33,7 +33,7 @@ export function submitDates(datesUsers) {
             dispatch(hideAlertSucces());
             dispatch(showLoader());
 
-            const resp = await axios.post("api/usersdata", datesUsers);
+            // const resp = await axios.post("api/usersdata", datesUsers);
 
             dispatch(showAlertSucces("Data saved successfully"));
         } catch (err) {

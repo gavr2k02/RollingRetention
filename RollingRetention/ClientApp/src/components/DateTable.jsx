@@ -31,25 +31,33 @@ const DateTable = ({
 
         let isValid = true;
         let id = "";
+        let message = "";
 
-        dispath(hideAlertError);
-        dispath(hideAlertSucces);
+        dispath(hideAlertError());
+        dispath(hideAlertSucces());
 
         datesUsers.map((datesUser) => {
-            if (!datesUser.dateLastActivity >= datesUser.dateRegistration) {
+            if (datesUser.dateLastActivity < datesUser.dateRegistration) {
                 id = datesUser.id;
                 isValid = false;
+                message =
+                    "The last activity date cannot be earlier than the registration date. Please check the entered data with the user ( ID = " +
+                    id +
+                    " )";
+            }
+
+            if (
+                datesUser.dateLastActivity == "" ||
+                datesUser.dateRegistration == ""
+            ) {
+                id = datesUser.id;
+                isValid = false;
+                message = "Please enter dates for the user ( ID = " + id + " )";
             }
         });
 
         if (!isValid) {
-            dispath(
-                showAlertWarning(
-                    "The last activity date cannot be earlier than the registration date. Please check the entered data with the user ( ID = " +
-                        id +
-                        " )"
-                )
-            );
+            dispath(showAlertWarning(message));
             return;
         } else dispath(hideAlertWarning());
 
