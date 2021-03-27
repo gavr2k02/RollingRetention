@@ -11,6 +11,8 @@ import {
     HIDE_ALERT_ERROR,
     SHOW_ALERT_SUCCES,
     HIDE_ALERT_SUCCES,
+    CALCULATE_DATA_7_DAY_FROM_DB,
+    CALCULATE_DATA_7_DAY_FROM_CLIENT,
 } from "./types";
 
 export function updateDate(datesUser) {
@@ -33,7 +35,7 @@ export function submitDates(datesUsers) {
             dispatch(hideAlertSucces());
             dispatch(showLoader());
 
-            // const resp = await axios.post("api/usersdata", datesUsers);
+            const resp = await axios.post("api/usersdata", datesUsers);
 
             dispatch(showAlertSucces("Data saved successfully"));
         } catch (err) {
@@ -93,5 +95,38 @@ export function showAlertError(text) {
 export function hideAlertError() {
     return {
         type: HIDE_ALERT_ERROR,
+    };
+}
+
+export function calculateData7DayFromClient(datesUser) {
+    return async (dispatch) => {
+        try {
+            const resp = await axios.post(
+                "api/rollingretention/calculatedatarollingRetention7Dayfromclient",
+                datesUser
+            );
+            dispatch({
+                type: CALCULATE_DATA_7_DAY_FROM_CLIENT,
+                payload: resp.data,
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}
+
+export function calculateData7DayFromDB() {
+    return async (dispatch) => {
+        try {
+            const resp = await axios.get(
+                "api/rollingretention/calculatedatarollingretention7dayfromdb"
+            );
+            dispatch({
+                type: CALCULATE_DATA_7_DAY_FROM_DB,
+                payload: resp.data,
+            });
+        } catch (err) {
+            console.log(err);
+        }
     };
 }

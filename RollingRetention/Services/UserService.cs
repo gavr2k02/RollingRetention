@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
-
 using RollingRetention.Data;
 using RollingRetention.Models;
 

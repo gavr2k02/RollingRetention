@@ -20,9 +20,8 @@ namespace RollingRetention.Controllers
 
         [HttpGet]
         public IEnumerable<User> GetUsers()
-        {
-            return userService.GetAllUsers();
-        }
+            => userService.GetAllUsers();
+
 
         // [HttpPost]
         // public ActionResult AddUser(User user)

@@ -32,8 +32,10 @@ namespace RollingRetention
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRollingRetentionService, RollingRetentionService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
+
 
             services.AddControllers();
 
