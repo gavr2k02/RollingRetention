@@ -48,13 +48,6 @@ namespace RollingRetention.Services
         {
             var dataRRXDs = new List<DataRollingRetentionXDay>();
 
-            foreach (var user in users)
-                dataRRXDs.Add(new DataRollingRetentionXDay()
-                {
-                    Id = user.Id,
-                    UserLifespan = (user.DateLastActivity - user.DateRegistration).Days
-                });
-
             return dataRRXDs;
         }
 

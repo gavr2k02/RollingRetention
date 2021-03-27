@@ -28,5 +28,9 @@ namespace RollingRetention.Controllers
         [HttpPost("CalculateDataRollingRetention7DayFromClient")]
         public IEnumerable<DataRollingRetentionXDay> CalculateDataRollingRetention7DayFromClient(IEnumerable<User> users)
             => rollingRetentionService.GetDataRollingRetention7DayFromClient(users);
+
+        [HttpPost("CalculateDataRollingRetentionXDayFromClient")]
+        public IEnumerable<DataRollingRetentionXDay> CalculateDataRollingRetentionXDayFromClient(IEnumerable<User> users)
+            => rollingRetentionService.GetDataRollingRetentionXDayFromClient(users);
     }
 }

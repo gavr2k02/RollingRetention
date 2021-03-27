@@ -22,7 +22,6 @@ namespace RollingRetention.Services
         {
             try
             {
-                // todo
                 userRepository.AddUser(user);
                 return true;
             }
@@ -38,7 +37,6 @@ namespace RollingRetention.Services
         {
             try
             {
-                // todo
                 var nUser = users.Select(user => user.Id = 0);
                 userRepository.AddUsers(users);
                 return true;

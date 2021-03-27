@@ -13,6 +13,10 @@ import {
     HIDE_ALERT_SUCCES,
     CALCULATE_DATA_7_DAY_FROM_DB,
     CALCULATE_DATA_7_DAY_FROM_CLIENT,
+    CALCULATE_DATA_X_DAY_FROM_DB,
+    CALCULATE_DATA_X_DAY_FROM_CLIENT,
+    SHOW_ALERT_ERROR_ROLLING_RETENTION,
+    HIDE_ALERT_ERROR_ROLLING_RETENTION,
 } from "./types";
 
 export function updateDate(datesUser) {
@@ -98,11 +102,25 @@ export function hideAlertError() {
     };
 }
 
+export function showAlertErrorRR(text) {
+    return {
+        type: SHOW_ALERT_ERROR_ROLLING_RETENTION,
+        payload: text,
+    };
+}
+
+export function hideAlertErrorRR() {
+    return {
+        type: HIDE_ALERT_ERROR_ROLLING_RETENTION,
+    };
+}
+
 export function calculateData7DayFromClient(datesUser) {
     return async (dispatch) => {
         try {
+            dispatch(hideAlertErrorRR());
             const resp = await axios.post(
-                "api/rollingretention/calculatedatarollingRetention7Dayfromclient",
+                "api/rollingretention/calculatedatarollingRetention7dayfromclient",
                 datesUser
             );
             dispatch({
@@ -110,7 +128,9 @@ export function calculateData7DayFromClient(datesUser) {
                 payload: resp.data,
             });
         } catch (err) {
-            console.log(err);
+            dispatch(
+                showAlertErrorRR("Something went wrong. Please check data")
+            );
         }
     };
 }
@@ -118,6 +138,7 @@ export function calculateData7DayFromClient(datesUser) {
 export function calculateData7DayFromDB() {
     return async (dispatch) => {
         try {
+            dispatch(hideAlertErrorRR());
             const resp = await axios.get(
                 "api/rollingretention/calculatedatarollingretention7dayfromdb"
             );
@@ -126,7 +147,46 @@ export function calculateData7DayFromDB() {
                 payload: resp.data,
             });
         } catch (err) {
-            console.log(err);
+            dispatch(
+                showAlertErrorRR("Something went wrong. Please check data")
+            );
+        }
+    };
+}
+
+export function calculateDataXDayFromClient(datesUser) {
+    return async (dispatch) => {
+        try {
+            const resp = await axios.post(
+                "api/rollingretention/calculatedatarollingRetentionxdayfromclient",
+                datesUser
+            );
+            dispatch({
+                type: CALCULATE_DATA_X_DAY_FROM_CLIENT,
+                payload: resp.data,
+            });
+        } catch (err) {
+            dispatch(
+                showAlertErrorRR("Something went wrong. Please check data")
+            );
+        }
+    };
+}
+
+export function calculateDataXDayFromDB() {
+    return async (dispatch) => {
+        try {
+            const resp = await axios.get(
+                "api/rollingretention/calculatedatarollingretentionxdayfromdb"
+            );
+            dispatch({
+                type: CALCULATE_DATA_X_DAY_FROM_DB,
+                payload: resp.data,
+            });
+        } catch (err) {
+            dispatch(
+                showAlertErrorRR("Something went wrong. Please check data")
+            );
         }
     };
 }

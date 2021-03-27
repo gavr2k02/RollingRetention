@@ -7,6 +7,8 @@ import {
     SHOW_LOADER,
     SHOW_ALERT_SUCCES,
     HIDE_ALERT_SUCCES,
+    SHOW_ALERT_ERROR_ROLLING_RETENTION,
+    HIDE_ALERT_ERROR_ROLLING_RETENTION,
 } from "./types";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
     alertWarning: null,
     alertSucces: null,
     alertError: null,
+    alertErrorRR: null,
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -34,6 +37,10 @@ export const appReducer = (state = initialState, action) => {
             return { ...state, alertError: action.payload };
         case HIDE_ALERT_ERROR:
             return { ...state, alertError: null };
+        case SHOW_ALERT_ERROR_ROLLING_RETENTION:
+            return { ...state, alertErrorRR: action.payload };
+        case HIDE_ALERT_ERROR_ROLLING_RETENTION:
+            return { ...state, alertErrorRR: null };
         default:
             return state;
     }

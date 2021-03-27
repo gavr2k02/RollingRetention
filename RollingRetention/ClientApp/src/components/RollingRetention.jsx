@@ -2,13 +2,26 @@ import { RollingRetention7Day, RollingRetentionXDay } from "./index";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
 
+import { AlertError } from "./index";
 import {
     calculateData7DayFromDB,
     calculateData7DayFromClient,
+    calculateDataXDayFromDB,
+    calculateDataXDayFromClient,
 } from "../redux/actions";
 
-const RollingRetention = ({ datesUsers }) => {
+const RollingRetention = ({ datesUsers, alertErrorRR }) => {
     const dispath = useDispatch();
+
+    const laodFromDBHandle = () => {
+        dispath(calculateDataXDayFromDB());
+        dispath(calculateData7DayFromDB());
+    };
+
+    const laodFromClientHandle = () => {
+        dispath(calculateDataXDayFromClient(datesUsers));
+        dispath(calculateData7DayFromClient(datesUsers));
+    };
 
     return (
         <div className='container p-5'>
@@ -20,18 +33,18 @@ const RollingRetention = ({ datesUsers }) => {
                 <RollingRetentionXDay />
             </div>
             <div className='container p-5 pt-0'>
+                {alertErrorRR && <AlertError text={alertErrorRR} />}
+
                 <button
                     type='button'
                     className='btn btn-primary float-end'
-                    onClick={() => dispath(calculateData7DayFromDB())}>
+                    onClick={laodFromDBHandle}>
                     Calculate from DB
                 </button>
                 <button
                     type='button'
                     className='btn btn-primary float-end me-3'
-                    onClick={() =>
-                        dispath(calculateData7DayFromClient(datesUsers))
-                    }>
+                    onClick={laodFromClientHandle}>
                     Calculate from client
                 </button>
             </div>
@@ -42,6 +55,7 @@ const RollingRetention = ({ datesUsers }) => {
 const mapStateToProps = (state) => {
     return {
         datesUsers: state.datesUsers.datesUser,
+        alertErrorRR: state.app.alertErrorRR,
     };
 };
 
