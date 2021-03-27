@@ -36,13 +36,16 @@ namespace RollingRetention.Data
         {
             try
             {
-                db.Users.AddRange(users);
+                var countUsers = db.Users.Count();
+                db.Users.AddRange(users.Select(user => { user.Id = ++countUsers; return user; }).ToList());
+                db.SaveChanges();
+
                 return true;
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return false;
+                throw;
             }
         }
 

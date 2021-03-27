@@ -24,9 +24,13 @@ namespace RollingRetention.Controllers
             return userService.GetAllUsers();
         }
 
+        // [HttpPost]
+        // public ActionResult AddUser(User user)
+        //     => userService.AddUser(user) ? Ok() : NotFound();
+
         [HttpPost]
-        public ActionResult AddUser(User user)
-            => userService.AddUser(user) ? Ok() : NotFound();
+        public ActionResult AddUsers(IEnumerable<User> users)
+            => userService.AddUsers(users) ? Ok() : StatusCode(500);
 
     }
 }

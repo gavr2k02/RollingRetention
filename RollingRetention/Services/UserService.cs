@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
@@ -39,11 +40,13 @@ namespace RollingRetention.Services
             try
             {
                 // todo
+                var nUser = users.Select(user => user.Id = 0);
                 userRepository.AddUsers(users);
                 return true;
             }
             catch (Exception ex)
             {
+                logger.LogError(ex.Message);
                 return false;
             }
         }
