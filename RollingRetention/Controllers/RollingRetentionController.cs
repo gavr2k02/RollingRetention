@@ -22,12 +22,13 @@ namespace RollingRetention.Controllers
             => rollingRetentionService.GetDataRollingRetentionXDayFromDB();
 
         [HttpGet("CalculateDataRollingRetention7DayFromDB")]
-        public IEnumerable<DataRollingRetentionXDay> CalculateDataRollingRetention7DayFromDB()
+        public IEnumerable<DataRollingRetention7Day> CalculateDataRollingRetention7DayFromDB()
             => rollingRetentionService.GetDataRollingRetention7DayFromDB();
 
         [HttpPost("CalculateDataRollingRetention7DayFromClient")]
-        public IEnumerable<DataRollingRetentionXDay> CalculateDataRollingRetention7DayFromClient(IEnumerable<User> users)
+        public IEnumerable<DataRollingRetention7Day> CalculateDataRollingRetention7DayFromClient(IEnumerable<User> users)
             => rollingRetentionService.GetDataRollingRetention7DayFromClient(users);
+
 
         [HttpPost("CalculateDataRollingRetentionXDayFromClient")]
         public IEnumerable<DataRollingRetentionXDay> CalculateDataRollingRetentionXDayFromClient(IEnumerable<User> users)

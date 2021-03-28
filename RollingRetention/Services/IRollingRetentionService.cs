@@ -7,8 +7,8 @@ namespace RollingRetention.Services
     {
         public IEnumerable<DataRollingRetentionXDay> GetDataRollingRetentionXDayFromClient(IEnumerable<User> users);
         public IEnumerable<DataRollingRetentionXDay> GetDataRollingRetentionXDayFromDB();
-        public IEnumerable<DataRollingRetentionXDay> GetDataRollingRetention7DayFromClient(IEnumerable<User> users);
-        public IEnumerable<DataRollingRetentionXDay> GetDataRollingRetention7DayFromDB();
+        public IEnumerable<DataRollingRetention7Day> GetDataRollingRetention7DayFromClient(IEnumerable<User> users);
+        public IEnumerable<DataRollingRetention7Day> GetDataRollingRetention7DayFromDB();
 
     }
 }

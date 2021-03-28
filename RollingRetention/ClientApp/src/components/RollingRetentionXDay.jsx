@@ -17,11 +17,11 @@ const options = {
 
 const RollingRetentionXDay = ({ rollingRetentionXDay }) => {
     const data = {
-        labels: rollingRetentionXDay.map((data) => data.id),
+        labels: rollingRetentionXDay.map((data) => "Day " + data.day),
         datasets: [
             {
-                label: "Day",
-                data: rollingRetentionXDay.map((data) => data.userLifespan),
+                label: "Percent",
+                data: rollingRetentionXDay.map((data) => data.percent),
                 backgroundColor: "rgba(54, 162, 235, 0.2)",
                 borderColor: "rgba(54, 162, 235, 1)",
                 borderWidth: 1,

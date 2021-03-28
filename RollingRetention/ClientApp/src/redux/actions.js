@@ -147,9 +147,7 @@ export function calculateData7DayFromDB() {
                 payload: resp.data,
             });
         } catch (err) {
-            dispatch(
-                showAlertErrorRR("Something went wrong. Please check data")
-            );
+            dispatch(showAlertErrorRR("Something went wrong"));
         }
     };
 }
@@ -184,9 +182,7 @@ export function calculateDataXDayFromDB() {
                 payload: resp.data,
             });
         } catch (err) {
-            dispatch(
-                showAlertErrorRR("Something went wrong. Please check data")
-            );
+            dispatch(showAlertErrorRR("Something went wrong"));
         }
     };
 }

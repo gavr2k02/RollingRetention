@@ -17,7 +17,7 @@ const options = {
 
 const RollingRetention7Day = ({ rollingRetention7Day }) => {
     const data = {
-        labels: rollingRetention7Day.map((data) => data.id),
+        labels: rollingRetention7Day.map((data) => "User " + data.id),
         datasets: [
             {
                 label: "Day",

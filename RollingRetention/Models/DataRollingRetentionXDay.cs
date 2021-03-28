@@ -2,7 +2,7 @@ namespace RollingRetention.Models
 {
     public class DataRollingRetentionXDay
     {
-        public int Id { get; set; }
-        public int UserLifespan { get; set; }
+        public int Day { get; set; }
+        public double Percent { get; set; }
     }
 }
