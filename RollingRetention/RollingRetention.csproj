@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>d116751a-b7e0-4c52-bda4-177cab81a07c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,5 +14,19 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
     <PackageReference Include="React.Core" Version="5.2.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="ClientApp\build\asset-manifest.json" />
+    <Content Remove="ClientApp\build\asset-manifest.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Properties\aunchSettings.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>

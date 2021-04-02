@@ -76,53 +76,25 @@ namespace RollingRetention.Services
         {
             try
             {
-                var dataRRXDs = new List<DataRollingRetentionXDay>();
+                var data = new List<DataRollingRetentionXDay>();
+                double countInstall = users.Count();
 
                 for (int i = 0; i < maxDay; i++)
                 {
-                    double countBack = 0;
-                    double countInstall = 0;
+                    double countBack = users.Where(user => user.DateRegistration.AddDays(i) <= user.DateLastActivity).Count();
+                    if (countBack == 0)
+                        return data;
 
-                    foreach (var user in users)
-                    {
-                        if (i <= (user.DateLastActivity - user.DateRegistration).Days)
-                            countBack++;
-
-                        if (user.DateRegistration >= user.DateLastActivity.AddDays(-i)) ;
-                        countInstall++;
-                    }
-
-                    if (countInstall == 0 || countBack == 0)
-                        return dataRRXDs;
-
-                    dataRRXDs.Add(new DataRollingRetentionXDay()
+                    data.Add(new DataRollingRetentionXDay()
                     {
                         Day = i,
-                        Percent = Math.Round(countBack / countInstall * 100, 2)
+                        Percent = (countBack / countInstall) * 100
                     });
                 }
 
-                return dataRRXDs;
-
-                // var dataRRXDs = new List<DataRollingRetentionXDay>();
-
-                // for (int i = 0; i < maxDay; i++)
-                // {
-                //     double countBack = users.Where(user => i <= (user.DateLastActivity - user.DateRegistration).Days).Count();
-                //     double countInstall = users.Where(user => (user.DateLastActivity.AddDays(-i) <= user.DateRegistration)).Count();
-
-                //     if (countBack == 0 || countInstall == 0)
-                //         return dataRRXDs;
-                //     else
-                //         dataRRXDs.Add(new DataRollingRetentionXDay()
-                //         {
-                //             Day = i,
-                //             Percent = Math.Round(countBack / countInstall * 100, 2)
-                //         });
-                // }
-                // return dataRRXDs;
+                return data;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -143,7 +115,7 @@ namespace RollingRetention.Services
 
                 return dataRR7Ds;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
